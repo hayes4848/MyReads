@@ -6,7 +6,7 @@ class Shelf extends React.Component {
 
   getBooksHTML(books) {
     let booksArray = books.map((book, index) => {
-      return <Book key={index} bookData={book} />
+      return <Book key={index} updateBooksShelf={this.props.updateBooksShelf} shelf={this.props.shelf} bookData={book} />
     })
     return booksArray
   }

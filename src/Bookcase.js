@@ -3,12 +3,6 @@ import { Link } from 'react-router-dom'
 import Shelf from './Shelf'
 
 class Bookshelf extends React.Component{
-  state = {
-    currentlyReading: [], 
-    wantToRead: [], 
-    read: []
-  }
-
 
   filterBooksByShelf = (books, shelf) => {
     return books.filter((book) => {
@@ -26,9 +20,9 @@ class Bookshelf extends React.Component{
             </div>
             <div className="list-books-content">
               <div>
-                <Shelf title="Currently Reading" books={this.filterBooksByShelf(this.props.books, 'currentlyReading')} />
-                <Shelf title="Want to Read" books={this.filterBooksByShelf(this.props.books, 'wantToRead')}/>
-                <Shelf title="Read" books={this.filterBooksByShelf(this.props.books, 'read')}/>
+                <Shelf title="Currently Reading" updateBooksShelf={this.props.updateBooksShelf} shelf="currentlyReading" books={this.filterBooksByShelf(this.props.books, 'currentlyReading')} />
+                <Shelf title="Want to Read" updateBooksShelf={this.props.updateBooksShelf} shelf="wantToRead" books={this.filterBooksByShelf(this.props.books, 'wantToRead')}/>
+                <Shelf title="Read" updateBooksShelf={this.props.updateBooksShelf} shelf="read" books={this.filterBooksByShelf(this.props.books, 'read')}/>
               </div>
             </div>
             <div className="open-search">
