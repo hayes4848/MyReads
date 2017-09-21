@@ -6,8 +6,13 @@ import { Route } from 'react-router-dom'
 import './App.css'
 
 class BooksApp extends React.Component {
-  state = {
-    books: []
+  constructor(props){
+    super(props)
+
+    this.state = {
+      books: [],
+      searchedBooks: []
+    }
   }
 
   componentDidMount() {
@@ -28,6 +33,18 @@ class BooksApp extends React.Component {
       })
   }
 
+  searchBooks = (event) => {
+    let query = event.target.value
+    if(query.length > 0){
+      BooksAPI.search(query, 20)
+        .then((searchedBooks) => {
+          this.setState({ searchedBooks })
+        })
+    }else{
+      this.setState({ searchedBooks: [] })
+    }
+  }
+
   render() {
     return (
       <div className="app">
@@ -35,7 +52,7 @@ class BooksApp extends React.Component {
           <Bookcase books={this.state.books} updateBooksShelf={this.updateBooksShelf} />
         )} />
         <Route exact path='/search' render={() => (
-          <Search />
+          <Search searchBooks={this.searchBooks} storedBooks={this.state.books} shelf='none' bookResults={this.state.searchedBooks} updateBooksShelf={this.updateBooksShelf} />
         )} />
 
       </div>
